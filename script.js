@@ -1,22 +1,25 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const scoreEl = document.getElementById('score');
 
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
 
-let snake, velocity, food, gameOver;
+let snake, velocity, food, gameOver, score;
 
 function reset() {
   snake = [{ x: 10, y: 10 }];
   velocity = { x: 0, y: 0 };
   food = randomFood();
   gameOver = false;
+  score = 0;
+  updateScore();
 }
 
 function randomFood() {
   return {
     x: Math.floor(Math.random() * tileCount),
-    y: Math.floor(Math.random() * tileCount)
+    y: Math.floor(Math.random() * tileCount),
   };
 }
 
@@ -49,6 +52,8 @@ function update() {
 
   if (head.x === food.x && head.y === food.y) {
     food = randomFood();
+    score++;
+    updateScore();
   } else {
     snake.pop();
   }
@@ -77,7 +82,12 @@ function draw() {
     ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2);
     ctx.font = '20px sans-serif';
     ctx.fillText('Press Enter to restart', canvas.width / 2, canvas.height / 2 + 30);
+    ctx.fillText(`Score: ${score}`, canvas.width / 2, canvas.height / 2 + 60);
   }
+}
+
+function updateScore() {
+  scoreEl.textContent = `Score: ${score}`;
 }
 
 document.addEventListener('keydown', (e) => {
