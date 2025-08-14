@@ -3,12 +3,23 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #222;
+  background: linear-gradient(135deg, #1e1e1e, #333);
   color: #fff;
   margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.game-wrapper {
+  text-align: center;
+}
+
+#score {
+  margin: 10px 0;
+  font-size: 1.2rem;
 }
 
 #gameCanvas {
   background: #000;
   border: 1px solid #555;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
